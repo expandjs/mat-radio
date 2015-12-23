@@ -105,6 +105,10 @@ Generally, we recommend to use `model` for data binding and `checked` to set the
                 display: none !important;
             }
 
+            :host .wrapper {
+                padding: 0;
+            }
+
             :host([label=""]) .button,
             :host(:not([label])) .button {
                 margin: 0;
@@ -122,8 +126,8 @@ Generally, we recommend to use `model` for data binding and `checked` to set the
 
             :host .label {
                 overflow: hidden;
-                text-overflow: ellipsis !important;
-                white-space: nowrap !important;
+                text-overflow: ellipsis !important; /* override */
+                white-space: nowrap !important; /* override */
             }
 
             :host([flip]) .label {
@@ -142,7 +146,7 @@ Generally, we recommend to use `model` for data binding and `checked` to set the
                     color: var(--mat-radio-color, #009688);
                     opacity: 1 !important;
                     transform: scale(1) !important;
-                    visibility: visible !important;
+                    visibility: inherit !important;
                 };
 
                 --mat-icon-button-active-icon-two: {
@@ -154,8 +158,10 @@ Generally, we recommend to use `model` for data binding and `checked` to set the
 
         <content select="input"></content>
 
-        <mat-icon-button class="holder button" active="{{checked}}" active-icon="mat:brightness-1" disabled="[[disabled]]" focused="{{focused}}" icon="mat:radio-button-unchecked" on-click="_handleToggle"></mat-icon-button>
-        <mat-ink class="label" disabled="[[disabled]]" on-click="_handleToggle">[[label]]</mat-ink>
+        <div class="wrapper">
+            <mat-icon-button class="holder button" active="{{checked}}" active-icon="mat:brightness-1" disabled="[[disabled]]" focused="{{focused}}" icon="mat:radio-button-unchecked" on-click="_handleToggle"></mat-icon-button>
+            <mat-ink class="label" disabled="[[disabled]]" on-click="_handleToggle">[[label]]</mat-ink>
+        </div>
 
     </template>
 
